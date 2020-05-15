@@ -1,0 +1,14 @@
+.elements__place-button {
+    width: 21px;
+    height: 20px;
+    background-image: url(../../../images/HeartButton.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.elements__place-button:hover {
+    opacity: 0.6;
+}
