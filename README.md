@@ -22,7 +22,7 @@
 
 
 ### Ссылка
-[https://stepanmatveev.github.io/mesto/index.html](https://stepanmatveev.github.io/mesto/index.html)
+[https://stepanmatveev.github.io/mesto/.html](https://stepanmatveev.github.io/mesto/index.html)
 
 
 ### Разработчик
