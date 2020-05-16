@@ -1,4 +1,4 @@
-.popup__input-button {
+.popup__save-button {
     display: block;
     min-width: 358px;
     min-height: 50px;
@@ -19,7 +19,7 @@
 }
 
 @media screen and (max-width: 425px) {
-    .popup__input-button {
+    .popup__save-button {
         min-width: 90%;
     }
 }

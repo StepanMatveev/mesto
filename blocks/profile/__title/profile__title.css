@@ -1,11 +1,15 @@
 .profile__title {
+    max-width: 281px;
+    max-height: 53px;
+    display: inline;
     font-family: 'Inter', Arial, sans-serif;
     font-weight: 500;
     font-size: 41px;
     line-height: 1.3;
     color: white;
     margin: 0px;
-  }
+    text-overflow: ellipsis;
+}
   
   @media screen and (max-width: 425px) {
     .profile__title {

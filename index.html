@@ -73,14 +73,14 @@
         </section>
     </main>
 
-    <section class="popup popup_viev_open">
-        <div class="popup__form">
-            <button type="button" class="popup__close-button"></button>
+    <section class="popup popup_viev_close">
+        <form class="popup__form" method="GET" action="#">
+            <button type="button" class="popup__close-button" type="button"></button>
             <h4 class="popup__title">Редактировать профиль</h4>
-            <input class="popup__input popup__input_name" type="text" placeholder="Имя Фамилия" required>
-            <input class="popup__input popup__input_occupation" type="text" placeholder="Род деятельности" required>
-            <button class="popup__input-button" type="submit">Сохранить</button>    
-        </div>
+            <input class="popup__input popup__input_name" type="text" placeholder="Имя Фамилия" name="Имя Фамилия" required>
+            <input class="popup__input popup__input_occupation" type="text" placeholder="Род деятельности" name="Род деяте" required>
+            <button class="popup__save-button" type="submit">Сохранить</button>    
+        </form>
     </section>   
 
     <footer class="footer">

@@ -1,6 +1,6 @@
 @import url(./__close-button/popup__close-button.css);
 @import url(./__form/popup__form.css);
-@import url(./__input-button/popup__input-button.css);
+@import url(./__save-button/popup__save-button.css);
 @import url(./__input/popup__input.css);
 @import url(./__title/popup__title.css);
 @import url(./_viev/popup_viev_close.css);
@@ -9,6 +9,7 @@
 .popup {
     width: 100vw;
     height: 100vh;
+    margin: auto;
     background-color: rgba(0,0,0,.5);
     align-items: center;
     justify-content: center;
