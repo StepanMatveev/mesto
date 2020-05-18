@@ -1,7 +1,7 @@
 .popup__close-button {
     min-width: 40px;
     min-height: 40px;
-    background-image: url(../../../images/closebutton.svg);
+    background-image: url(../../../images/close_button.svg);
     background-size: 100%;
     object-position: center;
     object-fit: cover;
