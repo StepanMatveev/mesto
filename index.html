@@ -6,67 +6,66 @@
     <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto</title>
 </head>
-<!--Очень торопился, адаптив только под 2 разрешения по Figme-->
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="./images/Logo.svg" alt="Логотип">
+        <img class="header__logo" src="./images/logo.svg" alt="Логотип">
     </header>
         
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="./images/Avatar.jpg" alt="Аватарка">
+            <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватарка">
             <div class="profile__info">
                 <div class="profile__top">
-                    <h2 class="profile__title">Жак-Ив Кусто</h2>
-                    <button class="profile__edit-button"></button>
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-button" type="button"></button>
                 </div>
                 <p class="profile__subtitle">Исследователь океана</p>
             </div>
-            <button class="profile__add-button"></button>    
+            <button class="profile__add-button" type="button"></button>    
         </section>
 
         <section class="elements">
             <ul class="elements__list">
                 <li class="elements__place">
-                    <img class="elements__place-image" src="./images/Karachaevsk.jpg" alt="Карачаевск">
+                    <img class="elements__place-image" src="./images/karachaevsk.jpg" alt="Карачаевск">
                     <div class="elements__place-signature">
                         <h3 class="elements__place-title">Карачаевск</h3>
-                        <button class="elements__place-button"></button>
+                        <button class="elements__place-button" type="button"></button>
                     </div>
                 </li>
                 <li class="elements__place">
-                    <img class="elements__place-image" src="./images/Elbrus.jpg" alt="Эльбрус">
+                    <img class="elements__place-image" src="./images/elbrus.jpg" alt="Эльбрус">
                     <div class="elements__place-signature">
                         <h3 class="elements__place-title">Гора Эльбрус</h3>
-                        <button class="elements__place-button"></button>
+                        <button class="elements__place-button" type="button"></button>
                     </div>
                 </li>
                 <li class="elements__place">
-                    <img class="elements__place-image" src="./images/Dombai.jpg" alt="Домбай">
+                    <img class="elements__place-image" src="./images/dombai.jpg" alt="Домбай">
                     <div class="elements__place-signature">
                         <h3 class="elements__place-title">Домбай</h3>
-                        <button class="elements__place-button"></button>
+                        <button class="elements__place-button" type="button"></button>
                     </div>
                 </li>
                 <li class="elements__place">
-                    <img class="elements__place-image" src="./images/Elbrus.jpg" alt="Эльбрус">
+                    <img class="elements__place-image" src="./images/elbrus.jpg" alt="Эльбрус">
                     <div class="elements__place-signature">
                         <h3 class="elements__place-title">Гора Эльбрус</h3>
-                        <button class="elements__place-button"></button>
+                        <button class="elements__place-button" type="button"></button>
                     </div>
                 </li>
                 <li class="elements__place">
-                    <img class="elements__place-image" src="./images/Dombai.jpg" alt="Домбай">
+                    <img class="elements__place-image" src="./images/dombai.jpg" alt="Домбай">
                     <div class="elements__place-signature">
                         <h3 class="elements__place-title">Домбай</h3>
-                        <button class="elements__place-button"></button>
+                        <button class="elements__place-button" type="button"></button>
                     </div>
                 </li>
                 <li class="elements__place">
-                    <img class="elements__place-image" src="./images/Karachaevsk.jpg" alt="Карачаевск">
+                    <img class="elements__place-image" src="./images/karachaevsk.jpg" alt="Карачаевск">
                     <div class="elements__place-signature">
                         <h3 class="elements__place-title">Карачаевск</h3>
-                        <button class="elements__place-button"></button>
+                        <button class="elements__place-button" type="button"></button>
                     </div>
                 </li>                                
             </ul>
@@ -74,11 +73,19 @@
     </main>
 
     <section class="popup popup_viev_close">
+<<<<<<< HEAD
         <form class="popup__form" method="GET" action="#">
             <button class="popup__close-button" type="button"></button>
             <h4 class="popup__title">Редактировать профиль</h4>
             <input class="popup__input popup__input_name" type="text" placeholder="Имя Фамилия" name="Имя Фамилия" required>
             <input class="popup__input popup__input_occupation" type="text" placeholder="Род деятельности" name="Род Род деятельности" required>
+=======
+        <form class="popup__form" method="GET" action="#" name="profile-edit-form">
+            <button class="popup__close-button" type="button" aria-label="close_button"></button>
+            <h4 class="popup__title">Редактировать профиль</h4>
+            <input class="popup__input popup__input_name" type="text" placeholder="Имя Фамилия" name="Name" required>
+            <input class="popup__input popup__input_occupation" type="text" placeholder="Род деятельности" name="Occupation" required>
+>>>>>>> Hotfix/ReviewFix
             <button class="popup__save-button" type="submit">Сохранить</button>    
         </form>
     </section>   

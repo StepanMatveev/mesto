@@ -10,11 +10,10 @@
     text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 700[x]) {
   .profile__subtitle {
       margin: auto;
       font-size: 14px;
-      line-height: 1.2;
       text-align: center;    
   }
 }

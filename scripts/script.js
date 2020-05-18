@@ -12,10 +12,8 @@ const formElement = document.querySelector('.popup__form');
 let nameInput = document.querySelector('.popup__input_name');
 let jobInput = document.querySelector('.popup__input_occupation');
 
-
-
 //Функция открытия\закрытия
-function openPopup () {
+function popupOpenClose () {
     if (popup.classList.contains('popup_viev_open')) { 
         popup.classList.remove('popup_viev_open');
         popup.classList.add('popup_viev_close');
@@ -28,24 +26,19 @@ function openPopup () {
     } // открываем если закрыт и берем значения для полей ввода из профиля
 }
 
-//Назначяем логику кнопок редактировать и закрыть
-editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click', openPopup);
-
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
     // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки. О том, как это делать, расскажем позже.
         profileName.textContent = nameInput.value;
-            if (profileName.textContent.length > 10){ 
-                profileName.style.fontSize = '34px'
-        }
-            profileJob.textContent = jobInput.value;
-        openPopup();
+        profileJob.textContent = jobInput.value;
+        popupOpenClose();
 }
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
-
+//Назначяем логику кнопок редактировать и закрыть
+editButton.addEventListener('click', popupOpenClose);
+closeButton.addEventListener('click', popupOpenClose);
 
 
