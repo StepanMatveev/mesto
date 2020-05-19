@@ -13,7 +13,7 @@ let nameInput = document.querySelector('.popup__input_name');
 let jobInput = document.querySelector('.popup__input_occupation');
 
 //Функция открытия\закрытия
-function popupOpenClose () {
+function openClosePopup () {
     if (popup.classList.contains('popup_viev_open')) { 
         popup.classList.remove('popup_viev_open');
         popup.classList.add('popup_viev_close');
@@ -38,7 +38,7 @@ function formSubmitHandler (evt) {
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 //Назначяем логику кнопок редактировать и закрыть
-editButton.addEventListener('click', popupOpenClose);
-closeButton.addEventListener('click', popupOpenClose);
+editButton.addEventListener('click', openClosePopup);
+closeButton.addEventListener('click', openClosePopup);
 
 
