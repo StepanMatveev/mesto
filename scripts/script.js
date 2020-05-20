@@ -13,7 +13,7 @@ let nameInput = document.querySelector('.popup__input_name');
 let jobInput = document.querySelector('.popup__input_occupation');
 
 //Функция открытия\закрытия
-function openClosePopup () {
+function openClosePopup() {
     if (popup.classList.contains('popup_viev_open')) { 
         popup.classList.remove('popup_viev_open');
         popup.classList.add('popup_viev_close');
@@ -33,7 +33,7 @@ function formSubmitHandler (evt) {
     // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки. О том, как это делать, расскажем позже.
         profileName.textContent = nameInput.value;
         profileJob.textContent = jobInput.value;
-        popupOpenClose();
+        openClosePopup();
 }
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);

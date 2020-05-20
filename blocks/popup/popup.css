@@ -3,8 +3,6 @@
 @import url(./__save-button/popup__save-button.css);
 @import url(./__input/popup__input.css);
 @import url(./__title/popup__title.css);
-@import url(./_viev/popup_viev_close.css);
-@import url(./_viev/popup_viev_open.css);
 
 .popup {
     width: 100vw;
