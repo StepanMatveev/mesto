@@ -27,6 +27,7 @@
         <section class="elements">
             <ul class="elements__list">
                 <li class="elements__place">
+                    <button class="element__remove-button" type="button" aria-label="удалить карточку"></button>
                     <img class="elements__place-image" src="./images/karachaevsk_pic.jpg" alt="Карачаевск">
                     <div class="elements__place-signature">
                         <h3 class="elements__place-title">Карачаевск</h3>
@@ -34,40 +35,21 @@
                     </div>
                 </li>
                 <li class="elements__place">
-                    <img class="elements__place-image" src="./images/elbrus_pic.jpg" alt="Эльбрус">
-                    <div class="elements__place-signature">
-                        <h3 class="elements__place-title">Гора Эльбрус</h3>
-                        <button class="elements__place-button" type="button" aria-label="лайк"></button>
-                    </div>
-                </li>
-                <li class="elements__place">
-                    <img class="elements__place-image" src="./images/dombai_pic.jpg" alt="Домбай">
-                    <div class="elements__place-signature">
-                        <h3 class="elements__place-title">Домбай</h3>
-                        <button class="elements__place-button" type="button" aria-label="лайк"></button>
-                    </div>
-                </li>
-                <li class="elements__place">
-                    <img class="elements__place-image" src="./images/elbrus_pic.jpg" alt="Эльбрус">
-                    <div class="elements__place-signature">
-                        <h3 class="elements__place-title">Гора Эльбрус</h3>
-                        <button class="elements__place-button" type="button" aria-label="лайк"></button>
-                    </div>
-                </li>
-                <li class="elements__place">
-                    <img class="elements__place-image" src="./images/dombai_pic.jpg" alt="Домбай">
-                    <div class="elements__place-signature">
-                        <h3 class="elements__place-title">Домбай</h3>
-                        <button class="elements__place-button" type="button" aria-label="лайк"></button>
-                    </div>
-                </li>
-                <li class="elements__place">
+                    <button class="element__remove-button" type="button" aria-label="удалить карточку"></button>
                     <img class="elements__place-image" src="./images/karachaevsk_pic.jpg" alt="Карачаевск">
                     <div class="elements__place-signature">
                         <h3 class="elements__place-title">Карачаевск</h3>
                         <button class="elements__place-button" type="button" aria-label="лайк"></button>
                     </div>
-                </li>                                
+                </li>
+                <li class="elements__place">
+                    <button class="element__remove-button" type="button" aria-label="удалить карточку"></button>
+                    <img class="elements__place-image" src="./images/karachaevsk_pic.jpg" alt="Карачаевск">
+                    <div class="elements__place-signature">
+                        <h3 class="elements__place-title">Карачаевск</h3>
+                        <button class="elements__place-button" type="button" aria-label="лайк"></button>
+                    </div>
+                </li>
             </ul>
         </section>
     </main>
@@ -85,6 +67,17 @@
     <footer class="footer">
         <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
+
+    <template id="pic-card">
+        <li class="elements__place">
+            <button type="button" class="elements__remove" aria-label="Удалить карточку"></button>
+            <img class="elements__place-image" src="" alt="Изображение">
+            <div class="elements__place-signature">
+                <h3 class="elements__place-title"></h3>
+                <button class="elements__place-button" type="button" aria-label="лайк"></button>
+            </div>
+        </li>   
+    </template>
     <script src="./scripts/script.js"></script>
 </body>
 </html>
