@@ -1,3 +1,30 @@
+const initialCards = [
+    {
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+];
+
 // Присваиваем необходимые переменные
 const popup = document.querySelector('.popup');
 const editButton = document.querySelector('.profile__edit-button');
@@ -13,8 +40,9 @@ let nameInput = document.querySelector('.popup__input_name');
 let jobInput = document.querySelector('.popup__input_occupation');
 
 //Функция открытия\закрытия
-function openClosePopup() {
-    if (popup.classList.contains('popup_viev_open')) { 
+function openPopup() {
+    popup.classList.add('popup_viev_open');
+    /*if (popup.classList.contains('popup_viev_open')) { 
         popup.classList.remove('popup_viev_open');
         popup.classList.add('popup_viev_close');
     }  //проверяем открыт ли попап и закрываем если нужно
@@ -23,7 +51,11 @@ function openClosePopup() {
         popup.classList.add('popup_viev_open');
         nameInput.value = profileName.textContent; 
         jobInput.value = profileJob.textContent;
-    } // открываем если закрыт и берем значения для полей ввода из профиля
+    } // открываем если закрыт и берем значения для полей ввода из профиля*/
+}
+
+function closePopup() {
+    popup.classList.remove('popup_viev_open');
 }
 
 // Обработчик «отправки» формы, хотя пока
@@ -38,7 +70,7 @@ function formSubmitHandler (evt) {
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 //Назначяем логику кнопок редактировать и закрыть
-editButton.addEventListener('click', openClosePopup);
-closeButton.addEventListener('click', openClosePopup);
+editButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
 
 

@@ -1,3 +1,6 @@
+@import url(./_place/popup__save-button_place.css);
+@import url(./_profile/popup__save-button_profile.css);
+
 .popup__save-button {
     display: block;
     min-width: 358px;

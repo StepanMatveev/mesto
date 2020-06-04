@@ -8,6 +8,7 @@
     background-color: transparent;
     border: none;
     outline: none;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .elements__place-button:hover {

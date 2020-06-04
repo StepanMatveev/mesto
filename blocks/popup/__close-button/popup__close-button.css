@@ -1,3 +1,7 @@
+@import url(./_add-place/popup__close-button_add-place.css);
+@import url(./_image/popup__close-button_image.css);
+@import url(./_profile/popup__close-button_profile.css);
+
 .popup__close-button {
     min-width: 40px;
     min-height: 40px;

@@ -4,6 +4,7 @@
 @import url(./__place-signature/elements__place-signature.css);
 @import url(./__place-title/elements__place-title.css);
 @import url(./__place/elements__place.css);
+@import url(./__remove-button/element__remove-button.css);
 
 .elements {
     max-width: 882px;

@@ -1,5 +1,7 @@
 @import url(./_name/popup__input_name.css);
 @import url(./_occupation/popup__input_occupation.css);
+@import url(./_link/popup__input_link.css);
+@import url(./_pic-name/popup__input_pic-name.css);
 
 .popup__input {
     font-family: 'Inter','Arial', sans-serif;
