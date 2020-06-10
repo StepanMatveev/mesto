@@ -8,7 +8,7 @@
 
 @media screen and (max-width: 425px){
     .elements__place {
-        max-width: 282px;
+        width: 282px;
         margin: auto;
     }
 }
