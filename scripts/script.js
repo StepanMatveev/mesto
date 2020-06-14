@@ -33,12 +33,6 @@ const popupImage = document.querySelector('.popup__image');
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
-const closeButton = document.querySelector('.popup__close-button');
-const submitButton = document.querySelector('.popup__save-button');
-const submitProfile = document.querySelector('.popup__save-button_profile');
-const submitPlace = document.querySelector('.popup__save-button_place');
-const delButton = document.querySelector('.elements__remove');
-const likeButton = document.querySelector('.elements__place-button');
 
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
@@ -50,19 +44,33 @@ const cardTemplate = document.querySelector('.pic-card').content;
 const formProfile = document.querySelector('.popup__form_profile');
 const formAddPlace = document.querySelector('.popup__form_add-place');
 // Берем значения из полей ввода формы
-let inputName = document.querySelector('.popup__input_name');
-let inputJob = document.querySelector('.popup__input_occupation');
-let inputTitle = document.querySelector('.popup__input_pic-name');
-let inputLink = document.querySelector('.popup__input_link');
+const inputName = document.querySelector('.popup__input_name');
+const inputJob = document.querySelector('.popup__input_occupation');
+const inputTitle = document.querySelector('.popup__input_pic-name');
+const inputLink = document.querySelector('.popup__input_link');
 
 
 //создаем карточку
 function createCard (name, link) {
     const picCard = cardTemplate.cloneNode(true);
+    picCard.querySelector('.elements__place-button').addEventListener('click', function(e){
+        e.target.classList.toggle('elements__place-button_active');
+    });
+    picCard.querySelector('.element__remove-button').addEventListener('click', function(e) {
+        e.target.closest('.elements__place').remove();
+    });
     const elementsPlaceImage = picCard.querySelector(".elements__place-image");
     const elementsPlaceTitle = picCard.querySelector(".elements__place-title");
     elementsPlaceTitle.textContent = name;
+    elementsPlaceImage.alt = name;
     elementsPlaceImage.src = link;
+    elementsPlaceImage.addEventListener('click', function() {
+        openPopup(popupImage)
+        document.querySelector('.popup__image-picture').src = link;
+        document.querySelector('.popup__image-picture').alt = name;
+        document.querySelector('.popup__image-subtitle').textContent = name; 
+    } );
+
     return picCard;
 };
 //добавляем карточку в начало списка
@@ -74,17 +82,6 @@ initialCards.forEach(function(el) {
     renderCard(elemList, createCard(el.name, el.link));
 });
 
-function like (e) {
-    if (e.target.classList.contains('elements__place-button')) {
-        e.target.classList.toggle('elements__place-button_active');
-    }
-};
-//удаляем ближайший элемент от кнопки
-function deleteCard(e) {
-    if (e.target.classList.contains('element__remove-button')){
-        e.target.closest('.elements__place').remove();
-    }
-};
 //общее открытие попапа 
 function openPopup(e) {
     e.classList.add('popup_viev_open');
@@ -99,19 +96,7 @@ function popupProfileOpen() {
     inputJob.value = profileJob.textContent;
     openPopup(popupProfile);
 };
-// открытие картинки
-function openCard(e) {
-    if (e.target.classList.contains('elements__place-image')) {
-        const elemImg = e.target.getAttribute('src');
-        const elemTitle = e.target.closest('.elements__place').querySelector('.elements__place-title');
-        const img = document.querySelector('.popup__image-picture');
-        const title = document.querySelector('.popup__image-subtitle');
-        img.src = elemImg;
-        title.textContent = elemTitle.textContent;
-        openPopup(popupImage);
-        
-    }
-};
+
 //закрываем для всех
 function closePopup(e) {
     if (e.target.classList.contains('popup__close-button') || e.target.classList.contains('popup__save-button') )  {
@@ -119,8 +104,6 @@ function closePopup(e) {
         elem.classList.remove('popup_viev_open');
     }
 };
-
-
 
 // Обработчики «отправки» форм
 function formProfileHandler (evt) {
@@ -139,10 +122,6 @@ formAddPlace.addEventListener('submit', formAddHandler);
 
 //Назначяем кнопки и слушатели
 popups.addEventListener('click', closePopup);
-elemList.addEventListener('click', like);
-elemList.addEventListener('click', like);
-elemList.addEventListener('click', deleteCard);
-elemList.addEventListener('click', openCard);
 
 editButton.addEventListener('click', popupProfileOpen);
 addButton.addEventListener('click', popupAddOpen);

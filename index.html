@@ -35,7 +35,7 @@
         <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
 
-    <section class="popups">
+    <div class="popups">
         <section class="popup popup__profile">
             <form class="popup__form popup__form_profile" method="GET" action="#" name="profile-edit-form">
                 <button class="popup__close-button" type="button" aria-label="закрыть"></button>
@@ -59,18 +59,18 @@
         <section class="popup popup__image">            
             <figure class=" popup__image-container">
                 <button class="popup__close-button" type="button" aria-label="закрыть"></button>
-                <img class="popup__image-picture" src="" alt="Изображение">
+                <img class="popup__image-picture" src="" alt="">
                 <figcaption class="popup__image-subtitle"></figcaption>
             </figure>
         </section>
-    </section>  
+    </div>  
 
     <template class="pic-card">
         <li class="elements__place">
             <button type="button" class="element__remove-button" aria-label="Удалить карточку"></button>
-            <img class="elements__place-image"   alt="">
+            <img class="elements__place-image">
             <div class="elements__place-signature">
-                <h3 class="elements__place-title"></h3>
+                <h2 class="elements__place-title"></h2>
                 <button class="elements__place-button" type="button" aria-label="лайк"></button>
             </div>
         </li>   
