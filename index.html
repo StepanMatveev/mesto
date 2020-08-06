@@ -10,7 +10,6 @@
     <header class="header">
         <img class="header__logo" src="./images/logo_pic.svg" alt="Логотип">
     </header>
-        
     <main class="content">
         <section class="profile">
             <img class="profile__avatar" src="./images/avatar_pic.jpg" alt="Аватарка">
@@ -30,32 +29,40 @@
             </ul>
         </section>
     </main>
-
     <footer class="footer">
         <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
-
     <div class="popups">
         <section class="popup popup__profile">
             <form class="popup__form popup__form_profile" method="GET" action="#" name="profile-edit-form">
                 <button class="popup__close-button" type="button" aria-label="закрыть"></button>
                 <h4 class="popup__title">Редактировать профиль</h4>
-                <input class="popup__input popup__input_name" type="text" placeholder="Имя Фамилия" name="name" required>
-                <input class="popup__input popup__input_occupation" type="text" placeholder="Род деятельности" name="occupation" required>
+                <label class="popup__field">
+                    <input class="popup__input popup__input_name" type="text" placeholder="Имя Фамилия" name="name" id="name" required minlength="2" maxlength="40" >
+                    <span class="popup__input-error" id="name-error"></span>
+                </label>    
+                <label class="popup__field">    
+                    <input class="popup__input popup__input_occupation" type="text" placeholder="Род деятельности" name="occupation" id="occupation" required minlength="2" maxlength="200">
+                    <span class="popup__input-error" id="occupation-error"></span>
+                </label>    
                 <button class="popup__save-button popup__save-button_profile" type="submit">Сохранить</button>    
             </form>
         </section> 
-        
         <section class="popup popup__add-place">
             <form class="popup__form popup__form_add-place" method="GET" action="#" name="profile-edit-form">
                 <button class="popup__close-button popup__close-button_add-place" type="button" aria-label="закрыть"></button>
                 <h4 class="popup__title">Новое место</h4>
-                <input class="popup__input popup__input_pic-name" type="text" placeholder="Название" name="name" required>
-                <input class="popup__input popup__input_link" type="url" placeholder="Ссылка на картинку" name="occupation" required>
+                <label class="popup__field">
+                    <input class="popup__input popup__input_pic-name" type="text" placeholder="Название" name="place" id="place" required>
+                    <span class="popup__input-error" id="place-error"></span>
+                </label>    
+                <label class="popup__field">
+                    <input class="popup__input popup__input_link" type="url" placeholder="Ссылка на картинку" name="link" id="link" required>
+                    <span class="popup__input-error" id="link-error"></span>
+                </label>
                 <button class="popup__save-button popup__save-button_place" type="submit">Создать</button>    
             </form>
         </section>
-        
         <section class="popup popup__image">            
             <figure class=" popup__image-container">
                 <button class="popup__close-button" type="button" aria-label="закрыть"></button>
@@ -64,7 +71,6 @@
             </figure>
         </section>
     </div>  
-
     <template class="pic-card">
         <li class="elements__place">
             <button type="button" class="element__remove-button" aria-label="Удалить карточку"></button>
@@ -75,6 +81,7 @@
             </div>
         </li>   
     </template>
+    <script src="./scripts/validate.js"></script> 
     <script src="./scripts/script.js"></script>
 </body>
 </html>
