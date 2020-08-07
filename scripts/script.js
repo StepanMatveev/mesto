@@ -81,28 +81,30 @@ function createCard (name, link) {
     elementsPlaceImage.src = link;
     elementsPlaceImage.addEventListener('click', function() {
         openPopup(popupImage)
-        document.querySelector('.popup__image-picture').src = link;
-        document.querySelector('.popup__image-picture').alt = name;
+        const elemPic = document.querySelector('.popup__image-picture');
+        elemPic.src = link;
+        elemPic.alt = name;
         document.querySelector('.popup__image-subtitle').textContent = name; 
     } );
 
     return picCard;
 };
+
 //добавляем карточку в начало списка
 function renderCard(e, el) {
     e.prepend(el);
-};
+}
 //берем карточки из массива
 initialCards.forEach(function(el) {
     renderCard(elemList, createCard(el.name, el.link));
 });
 
 //общее открытие попапа и слушатели закрытия
-function openPopup(e) {
-    e.classList.add('popup_viev_open');
-    e.addEventListener('click', closePopupButton);
+function openPopup(el) {
+    el.classList.add('popup_viev_open');
+    el.addEventListener('click', closePopupButton);
     document.addEventListener('keydown', closePopupEsc);
-    e.addEventListener('mousedown', closeByOverlay);
+    el.addEventListener('mousedown', closeByOverlay);
 };
 
 function popupAddOpen() {
@@ -124,24 +126,31 @@ function popupProfileOpen() {
 };
 
 // функции закрытия
+function closePopup(el) {
+    el.classList.remove('popup_viev_open');
+    el.removeEventListener('click', closePopupButton);
+    document.removeEventListener('keydown', closePopupEsc);
+    el.removeEventListener('mousedown', closeByOverlay);
+};
+
 function closePopupButton(e) {
     if (e.target.classList.contains('popup__close-button') || e.target.classList.contains('popup__save-button') )  {
         const elem = e.target.closest('.popup');
-        elem.classList.remove('popup_viev_open');
+        closePopup(elem);
     }
 };
 
 function closePopupEsc(e) {
     const elem = popups.querySelector('.popup_viev_open');
     if (e.key === "Escape") {
-    elem.classList.remove('popup_viev_open');
+        closePopup(elem);
     }
 };
 
 function closeByOverlay(e) {
     if (!e.target.closest('.popup__form')) {
         const elem = popups.querySelector('.popup_viev_open');
-        elem.classList.remove('popup_viev_open');
+        closePopup(elem);
     }
 };
 
