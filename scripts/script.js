@@ -50,6 +50,8 @@ const inputTitle = document.querySelector('.popup__input_pic-name');
 const inputLink = document.querySelector('.popup__input_link');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
+const imgPicture = document.querySelector('.popup__image-picture');
+const imgSubtitle = document.querySelector('.popup__image-subtitle').textContent;
 
 // объекты валидации
 const validationObject = {
@@ -80,15 +82,13 @@ function createCard (name, link) {
     elementsPlaceImage.alt = name;
     elementsPlaceImage.src = link;
     elementsPlaceImage.addEventListener('click', function() {
-        openPopup(popupImage)
-        const elemPic = document.querySelector('.popup__image-picture');
-        elemPic.src = link;
-        elemPic.alt = name;
-        document.querySelector('.popup__image-subtitle').textContent = name; 
-    } );
-
+        openPopup(popupImage);
+        imgPicture.src = link;
+        imgPicture.alt = name;
+        imgSubtitle = name; 
+    });
     return picCard;
-};
+}
 
 //добавляем карточку в начало списка
 function renderCard(e, el) {
@@ -105,7 +105,7 @@ function openPopup(el) {
     el.addEventListener('click', closePopupButton);
     document.addEventListener('keydown', closePopupEsc);
     el.addEventListener('mousedown', closeByOverlay);
-};
+}
 
 function popupAddOpen() {
     inputTitle.value = '';
@@ -114,7 +114,7 @@ function popupAddOpen() {
     hideInputError(inputLink, validationObject.inputErrorClass, validationObject.errorClass);
     handleCheckSubmit(formAddPlace, savePlaceButton, validationObject.inactiveButtonClass);
     openPopup(popupAddPlace);
-};
+}
 
 function popupProfileOpen() {
     inputName.value = profileName.textContent;
@@ -123,7 +123,7 @@ function popupProfileOpen() {
     hideInputError(inputJob, validationObject.inputErrorClass, validationObject.errorClass);
     handleCheckSubmit(formProfile, saveProfileButton, validationObject.inactiveButtonClass);
     openPopup(popupProfile);
-};
+}
 
 // функции закрытия
 function closePopup(el) {
@@ -131,40 +131,40 @@ function closePopup(el) {
     el.removeEventListener('click', closePopupButton);
     document.removeEventListener('keydown', closePopupEsc);
     el.removeEventListener('mousedown', closeByOverlay);
-};
+}
 
 function closePopupButton(e) {
     if (e.target.classList.contains('popup__close-button') || e.target.classList.contains('popup__save-button') )  {
         const elem = e.target.closest('.popup');
         closePopup(elem);
     }
-};
+}
 
 function closePopupEsc(e) {
     const elem = popups.querySelector('.popup_viev_open');
     if (e.key === "Escape") {
         closePopup(elem);
     }
-};
+}
 
 function closeByOverlay(e) {
     if (!e.target.closest('.popup__form')) {
         const elem = popups.querySelector('.popup_viev_open');
         closePopup(elem);
     }
-};
+}
 
 // Обработчики «отправки» форм
 function formProfileHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки. О том, как это делать, расскажем позже.
     profileName.textContent = inputName.value;
     profileJob.textContent = inputJob.value;
-};
+}
 
 function formAddHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки. О том, как это делать, расскажем позже.
     renderCard(elemList, createCard(inputTitle.value, inputLink.value));
-};
+}
 
 //Назначяем кнопки и слушатели
 editButton.addEventListener('click', popupProfileOpen);
