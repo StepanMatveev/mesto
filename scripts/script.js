@@ -51,7 +51,7 @@ const inputLink = document.querySelector('.popup__input_link');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const imgPicture = document.querySelector('.popup__image-picture');
-const imgSubtitle = document.querySelector('.popup__image-subtitle').textContent;
+const imgSubtitle = document.querySelector('.popup__image-subtitle');
 
 // объекты валидации
 const validationObject = {
@@ -85,7 +85,7 @@ function createCard (name, link) {
         openPopup(popupImage);
         imgPicture.src = link;
         imgPicture.alt = name;
-        imgSubtitle = name; 
+        imgSubtitle.textContent = name; 
     });
     return picCard;
 }
