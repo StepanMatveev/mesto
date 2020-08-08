@@ -148,7 +148,7 @@ function closePopupEsc(e) {
 }
 
 function closeByOverlay(e) {
-    if (!e.target.closest('.popup__form')) {
+    if (!e.target.closest('.popup__container')) {
         const elem = popups.querySelector('.popup_viev_open');
         closePopup(elem);
     }
