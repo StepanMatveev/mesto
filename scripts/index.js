@@ -1,3 +1,6 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -61,45 +64,14 @@ const validationObject = {
     inactiveButtonClass: 'popup__save-button_disabled',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__input-error_active'
-  };
+};
 
-//проверка валидации оъектов
-enableValidation(validationObject);
-
-
-//создаем карточку
-function createCard (name, link) {
-    const picCard = cardTemplate.cloneNode(true);
-    picCard.querySelector('.elements__place-button').addEventListener('click', function(e){
-        e.target.classList.toggle('elements__place-button_active');
-    });
-    picCard.querySelector('.element__remove-button').addEventListener('click', function(e) {
-        e.target.closest('.elements__place').remove();
-    });
-    const elementsPlaceImage = picCard.querySelector(".elements__place-image");
-    const elementsPlaceTitle = picCard.querySelector(".elements__place-title");
-    elementsPlaceTitle.textContent = name;
-    elementsPlaceImage.alt = name;
-    elementsPlaceImage.src = link;
-    elementsPlaceImage.addEventListener('click', function() {
-        openPopup(popupImage);
-        imgPicture.src = link;
-        imgPicture.alt = name;
-        imgSubtitle.textContent = name; 
-    });
-    return picCard;
-}
-
-//добавляем карточку в начало списка
-function renderCard(e, el) {
-    e.prepend(el);
-}
-//берем карточки из массива
-initialCards.forEach(function(el) {
-    renderCard(elemList, createCard(el.name, el.link));
+initialCards.forEach((item) => {
+    const card = new Card(item.name, item.link, '.pic-card');
+    const cardEl = card.creatCard();
+    elemList.prepend(cardEl);
 });
 
-//общее открытие попапа и слушатели закрытия
 function openPopup(el) {
     el.classList.add('popup_viev_open');
     el.addEventListener('click', closePopupButton);
@@ -110,18 +82,16 @@ function openPopup(el) {
 function popupAddOpen() {
     inputTitle.value = '';
     inputLink.value = '';
-    hideInputError(inputTitle, validationObject.inputErrorClass, validationObject.errorClass);
-    hideInputError(inputLink, validationObject.inputErrorClass, validationObject.errorClass);
-    handleCheckSubmit(formAddPlace, savePlaceButton, validationObject.inactiveButtonClass);
+    const validation = new FormValidator(validationObject, formAddPlace);
+    validation.enableValidation();
     openPopup(popupAddPlace);
 }
 
 function popupProfileOpen() {
     inputName.value = profileName.textContent;
     inputJob.value = profileJob.textContent;
-    hideInputError(inputName, validationObject.inputErrorClass, validationObject.errorClass);
-    hideInputError(inputJob, validationObject.inputErrorClass, validationObject.errorClass);
-    handleCheckSubmit(formProfile, saveProfileButton, validationObject.inactiveButtonClass);
+    const validation = new FormValidator(validationObject, formProfile);
+    validation.enableValidation();
     openPopup(popupProfile);
 }
 
@@ -154,6 +124,9 @@ function closeByOverlay(e) {
     }
 }
 
+//экспорт функций закрытия для увеличеной картинки, тк функционал ее открытия генерируеться в классе Card
+export {closePopupButton,closePopupEsc ,closeByOverlay};
+
 // Обработчики «отправки» форм
 function formProfileHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки. О том, как это делать, расскажем позже.
@@ -163,7 +136,9 @@ function formProfileHandler (evt) {
 
 function formAddHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки. О том, как это делать, расскажем позже.
-    renderCard(elemList, createCard(inputTitle.value, inputLink.value));
+    const card = new Card(inputTitle.value, inputLink.value, '.pic-card');
+    const cardEl = card.creatCard();
+    elemList.prepend(cardEl);
 }
 
 //Назначяем кнопки и слушатели
@@ -171,5 +146,3 @@ editButton.addEventListener('click', popupProfileOpen);
 addButton.addEventListener('click', popupAddOpen);
 formProfile.addEventListener('submit', formProfileHandler);
 formAddPlace.addEventListener('submit', formAddHandler);
-
-
