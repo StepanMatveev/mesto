@@ -1,4 +1,4 @@
-import {closePopupButton, closePopupEsc, closeByOverlay} from './index.js';
+import {closePopupButton, closePopupEsc, closeByOverlay} from './closingFunctionality.js';
 
 
 // необходимые данные и попап
@@ -23,7 +23,7 @@ export default class Card {
     }
 
     //Создаем карточку из полученных данных
-    creatCard() {
+    createCard() {
         this._element = this._getTemplate();
         this._element.querySelector('.elements__place-image').src = this._link;
         this._element.querySelector('.elements__place-title').textContent = this._name;

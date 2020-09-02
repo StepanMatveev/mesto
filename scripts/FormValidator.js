@@ -1,27 +1,26 @@
-export default class FormVaidation {
-    constructor(obj, formSelector) {
-        this._formSelector = formSelector;
+export default class FormValidator {
+    constructor(obj, formElement) {
+        this._formElement = formElement;
         this._inputSelector = obj.inputSelector;
-        this._submitButtonSelector = obj.submitButtonSelector;
         this._inactiveButtonClass = obj.inactiveButtonClass;
         this._inputErrorClass = obj._inputErrorClass;
         this._errorClass = obj.errorClass;
-        this._submitButton = this._formSelector.querySelector(obj.submitButtonSelector);
+        this._submitButton = this._formElement.querySelector(obj.submitButtonSelector);
     }
 
     //общая валидация и сброс ошибок
     enableValidation() { 
-        const inputElements = Array.from(this._formSelector.querySelectorAll(this._inputSelector));   
+        const inputElements = Array.from(this._formElement.querySelectorAll(this._inputSelector));   
 
         inputElements.forEach (input => {
             input.addEventListener('input', e => this._handleCheckInput(e, this._inputErrorClass, this._errorClass));
         });
-        this._formSelector.addEventListener('input', () => this._handleCheckSubmit(this._formSelector, this._submitButton, this._inactiveButtonClass));
+        this._formElement.addEventListener('input', () => this._handleCheckSubmit(this._formElement, this._submitButton, this._inactiveButtonClass));
         //сброс ошибок
         inputElements.forEach (input => {
             this._hideInputError(input, this._inputErrorClass, this._errorClass);
         });
-        this._handleCheckSubmit(this._formSelector, this._submitButton, this._inactiveButtonClass);
+        this._handleCheckSubmit(this._formElement, this._submitButton, this._inactiveButtonClass);
     }
 
         //Проверка инпутов
@@ -44,7 +43,7 @@ export default class FormVaidation {
 
     //показать error
     _showInputError(input, inputErrorClass, errorClass) {
-        const error = document.querySelector(`#${input.id}-error`);
+        const error = this._formElement.querySelector(`#${input.id}-error`);
         input.classList.add(inputErrorClass);
         error.classList.add(errorClass);
         error.textContent = input.validationMessage;
@@ -52,7 +51,7 @@ export default class FormVaidation {
     
     //Скрыть error
     _hideInputError(input, inputErrorClass, errorClass) {
-        const error = document.querySelector(`#${input.id}-error`);
+        const error = this._formElement.querySelector(`#${input.id}-error`);
         input.classList.remove(inputErrorClass);
         error.classList.remove(errorClass);
         error.textContent = '';

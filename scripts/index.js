@@ -1,32 +1,8 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import {initialCards} from './initialCards.js'
+import {closeByOverlay, closePopupButton, closePopupEsc} from './closingFunctionality.js';
 
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
 
 // Присваиваем необходимые переменные
 const popups = document.querySelector('.popups');
@@ -58,7 +34,7 @@ const imgSubtitle = document.querySelector('.popup__image-subtitle');
 
 // объекты валидации
 const validationObject = {
-    formSelector: '.popup__form',
+    formElement: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__save-button',
     inactiveButtonClass: 'popup__save-button_disabled',
@@ -66,11 +42,16 @@ const validationObject = {
     errorClass: 'popup__input-error_active'
 };
 
-initialCards.forEach((item) => {
-    const card = new Card(item.name, item.link, '.pic-card');
-    const cardEl = card.creatCard();
-    elemList.prepend(cardEl);
-});
+
+
+function renderCard(cards) {
+    cards.forEach((item) => {
+        const card = new Card(item.name, item.link, '.pic-card');
+        const cardEl = card.createCard();
+        elemList.prepend(cardEl);
+    });
+}
+renderCard(initialCards);
 
 function openPopup(el) {
     el.classList.add('popup_viev_open');
@@ -95,37 +76,7 @@ function popupProfileOpen() {
     openPopup(popupProfile);
 }
 
-// функции закрытия
-function closePopup(el) {
-    el.classList.remove('popup_viev_open');
-    el.removeEventListener('click', closePopupButton);
-    document.removeEventListener('keydown', closePopupEsc);
-    el.removeEventListener('mousedown', closeByOverlay);
-}
 
-function closePopupButton(e) {
-    if (e.target.classList.contains('popup__close-button') || e.target.classList.contains('popup__save-button') )  {
-        const elem = e.target.closest('.popup');
-        closePopup(elem);
-    }
-}
-
-function closePopupEsc(e) {
-    const elem = popups.querySelector('.popup_viev_open');
-    if (e.key === "Escape") {
-        closePopup(elem);
-    }
-}
-
-function closeByOverlay(e) {
-    if (!e.target.closest('.popup__container')) {
-        const elem = popups.querySelector('.popup_viev_open');
-        closePopup(elem);
-    }
-}
-
-//экспорт функций закрытия для увеличеной картинки, тк функционал ее открытия генерируеться в классе Card
-export {closePopupButton,closePopupEsc ,closeByOverlay};
 
 // Обработчики «отправки» форм
 function formProfileHandler (evt) {
@@ -137,7 +88,7 @@ function formProfileHandler (evt) {
 function formAddHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки. О том, как это делать, расскажем позже.
     const card = new Card(inputTitle.value, inputLink.value, '.pic-card');
-    const cardEl = card.creatCard();
+    const cardEl = card.createCard();
     elemList.prepend(cardEl);
 }
 
