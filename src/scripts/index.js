@@ -4,7 +4,8 @@ import PopupWithForm from './PopupWIthForm.js';
 import UserInfo from './UserInfo.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
-import {initialCards} from './initialCards.js'
+import {initialCards} from './initialCards.js';
+import '../pages/index.css';
 
 // Присваиваем необходимые переменные
 const popupProfileSelector = '.popup__profile';
