@@ -1,21 +1,15 @@
-import {closePopupButton, closePopupEsc, closeByOverlay} from './closingFunctionality.js';
-
-
-// необходимые данные и попап
-const popupImage = document.querySelector('.popup__image');
-const image = popupImage.querySelector('.popup__image-picture');
-const title = popupImage.querySelector('.popup__image-subtitle');
-
 export default class Card {
-    constructor (name, link, cardSelector) {
+    constructor (name, link, cardSelector, { handleCardClick }) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     //разметка карточки
     _getTemplate() {
-        const cardElem = document.querySelector(this._cardSelector)
+        const cardElem = document
+        .querySelector(this._cardSelector)
         .content
         .querySelector('.elements__place')
         .cloneNode(true);
@@ -25,8 +19,10 @@ export default class Card {
     //Создаем карточку из полученных данных
     createCard() {
         this._element = this._getTemplate();
-        this._element.querySelector('.elements__place-image').src = this._link;
         this._element.querySelector('.elements__place-title').textContent = this._name;
+        const cardImage = this._element.querySelector('.elements__place-image');
+        cardImage.src = this._link;
+        cardImage.alt = this._name;
         this._setEventListeners();
         return this._element; 
     }
@@ -40,17 +36,8 @@ export default class Card {
         this._deleteCard();
         });
         this._element.querySelector('.elements__place-image').addEventListener('click', () => {
-            this._openPopupImage();    
+            this._handleCardClick(this._name, this._link);
         });
-    }
-
-    _openPopupImage() {
-        popupImage.classList.add('popup_viev_open');
-        image.src = this._link;
-        title.textContent = this._name;
-        popupImage.addEventListener('click', closePopupButton);
-        document.addEventListener('keydown', closePopupEsc);
-        popupImage.addEventListener('mousedown', closeByOverlay);
     }
 
     _deleteCard() {

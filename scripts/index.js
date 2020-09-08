@@ -1,36 +1,35 @@
 import Card from './Card.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWIthForm.js';
+import UserInfo from './UserInfo.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 import {initialCards} from './initialCards.js'
-import {closeByOverlay, closePopupButton, closePopupEsc} from './closingFunctionality.js';
-
 
 // Присваиваем необходимые переменные
-const popups = document.querySelector('.popups');
-const popupProfile = document.querySelector('.popup__profile');
-const popupAddPlace = document.querySelector('.popup__add-place');
-const popupImage = document.querySelector('.popup__image');
+const popupProfileSelector = '.popup__profile';
+const popupCardSelector = '.popup__add-place';
+const popupPhotoSelector = '.popup__image';
+const imgSelector = '.popup__image-picture'
+const titleSelection = '.popup__image-subtitle';
+const picCard = '.pic-card';
+
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
-const saveProfileButton = document.querySelector('.popup__save-button_profile');
-const savePlaceButton = document.querySelector('.popup__save-button_place');
 
 //переменные заготовок
-const elemList = document.querySelector('.elements__list');
-const cardTemplate = document.querySelector('.pic-card').content;
+const elemList = '.elements__list';
 
 // Находим форму в DOM
-const formProfile = document.querySelector('.popup__form_profile');
-const formAddPlace = document.querySelector('.popup__form_add-place');
+const formProfileElement = document.querySelector('.popup__form_profile');
+const formCardsElement = document.querySelector('.popup__form_add-place');
 
 // Берем значения из полей ввода формы
-const inputName = document.querySelector('.popup__input_name');
-const inputJob = document.querySelector('.popup__input_occupation');
-const inputTitle = document.querySelector('.popup__input_pic-name');
-const inputLink = document.querySelector('.popup__input_link');
-const profileName = document.querySelector('.profile__title');
-const profileJob = document.querySelector('.profile__subtitle');
-const imgPicture = document.querySelector('.popup__image-picture');
-const imgSubtitle = document.querySelector('.popup__image-subtitle');
+const nameInput = document.querySelector('.popup__input_name');
+const jobInput = document.querySelector('.popup__input_occupation');
+const titleInput = document.querySelector('.popup__input_pic-name');
+const linkInput = document.querySelector('.popup__input_link');
+
 
 // объекты валидации
 const validationObject = {
@@ -42,58 +41,75 @@ const validationObject = {
     errorClass: 'popup__input-error_active'
 };
 
+const obj = {
+    name: '.profile__title',
+    job: '.profile__subtitle'
+};
 
 
-function renderCard(cards) {
-    cards.forEach((item) => {
-        const card = new Card(item.name, item.link, '.pic-card');
-        const cardEl = card.createCard();
-        elemList.prepend(cardEl);
+//классы валидации
+const profileValidation = new FormValidator(validationObject, formProfileElement);
+const cardsValidation = new FormValidator(validationObject, formCardsElement);
+
+//Включили валидацию
+profileValidation.enableValidation();
+cardsValidation.enableValidation();
+
+//Эинформации о пользователе
+const userInfo = new UserInfo(obj);
+
+//рисуем карточки
+const cardsList = new Section ({
+    items: initialCards,
+    renderer: (item) => {
+        const card = new Card(item.name, item.link, picCard, { 
+            handleCardClick: () => {
+                popupPhoto.openPopup(item.name, item.link);
+        } 
     });
-}
-renderCard(initialCards);
+        const cardEl = card.createCard();
+        cardsList.addItem(cardEl);
+    }
+}, elemList);
 
-function openPopup(el) {
-    el.classList.add('popup_viev_open');
-    el.addEventListener('click', closePopupButton);
-    document.addEventListener('keydown', closePopupEsc);
-    el.addEventListener('mousedown', closeByOverlay);
-}
+//попап редактирования профиля
+const popupProfile = new PopupWithForm(popupProfileSelector, { handleFormSubmit() {
+    popupProfile.closePopup();
+    userInfo.setUserInfo(nameInput.value, jobInput.value);
+}})
 
-function popupAddOpen() {
-    inputTitle.value = '';
-    inputLink.value = '';
-    const validation = new FormValidator(validationObject, formAddPlace);
-    validation.enableValidation();
-    openPopup(popupAddPlace);
-}
-
-function popupProfileOpen() {
-    inputName.value = profileName.textContent;
-    inputJob.value = profileJob.textContent;
-    const validation = new FormValidator(validationObject, formProfile);
-    validation.enableValidation();
-    openPopup(popupProfile);
-}
-
-
-
-// Обработчики «отправки» форм
-function formProfileHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки. О том, как это делать, расскажем позже.
-    profileName.textContent = inputName.value;
-    profileJob.textContent = inputJob.value;
-}
-
-function formAddHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы. Так мы можем определить свою логику отправки. О том, как это делать, расскажем позже.
-    const card = new Card(inputTitle.value, inputLink.value, '.pic-card');
+//попап добавления фото
+const popupAddCard = new PopupWithForm(popupCardSelector, { handleFormSubmit() {//обработчик сабмита формы
+    const card = new Card(titleInput.value, linkInput.value, picCard,  { 
+        handleCardClick: (name, link) => {
+            popupPhoto.openPopup(name, link);
+        }
+    });
     const cardEl = card.createCard();
-    elemList.prepend(cardEl);
-}
+    cardsList.addItem(cardEl);
+    popupAddCard.closePopup();
+    }
+})
 
-//Назначяем кнопки и слушатели
-editButton.addEventListener('click', popupProfileOpen);
-addButton.addEventListener('click', popupAddOpen);
-formProfile.addEventListener('submit', formProfileHandler);
-formAddPlace.addEventListener('submit', formAddHandler);
+//попап с картинкой
+const popupPhoto = new PopupWithImage(popupPhotoSelector, imgSelector, titleSelection);
+popupPhoto.setEventListeners();
+
+//слушатели
+popupAddCard.setEventListeners();
+
+addButton.addEventListener('click', () => {
+    popupAddCard.openPopup();
+    cardsValidation.enableValidation();//обнулили валидации
+});
+
+popupProfile.setEventListeners();
+
+editButton.addEventListener('click', () => {
+    popupProfile.openPopup();
+    nameInput.value = userInfo.getUserInfo().name;
+    jobInput.value = userInfo.getUserInfo().job; 
+    profileValidation.enableValidation();//обнулили валидации
+});
+
+cardsList.renderItems();
