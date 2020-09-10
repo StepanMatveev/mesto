@@ -1,10 +1,10 @@
-import Card from './Card.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWIthForm.js';
-import UserInfo from './UserInfo.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import {initialCards} from './initialCards.js';
+import Card from '../components/Card.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWIthForm.js';
+import UserInfo from '../components/UserInfo.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import {initialCards} from '../utils/initialCards.js';
 import '../pages/index.css';
 
 // Присваиваем необходимые переменные
@@ -42,7 +42,7 @@ const validationObject = {
     errorClass: 'popup__input-error_active'
 };
 
-const obj = {
+const profileSelectors = {
     name: '.profile__title',
     job: '.profile__subtitle'
 };
@@ -57,7 +57,7 @@ profileValidation.enableValidation();
 cardsValidation.enableValidation();
 
 //Эинформации о пользователе
-const userInfo = new UserInfo(obj);
+const userInfo = new UserInfo(profileSelectors);
 
 //рисуем карточки
 const cardsList = new Section ({
@@ -101,7 +101,7 @@ popupAddCard.setEventListeners();
 
 addButton.addEventListener('click', () => {
     popupAddCard.openPopup();
-    cardsValidation.enableValidation();//обнулили валидации
+    cardsValidation.resetErrors();//обнулили валидации
 });
 
 popupProfile.setEventListeners();
@@ -110,7 +110,7 @@ editButton.addEventListener('click', () => {
     popupProfile.openPopup();
     nameInput.value = userInfo.getUserInfo().name;
     jobInput.value = userInfo.getUserInfo().job; 
-    profileValidation.enableValidation();//обнулили валидации
+    profileValidation.resetErrors();//обнулили валидации
 });
 
 cardsList.renderItems();

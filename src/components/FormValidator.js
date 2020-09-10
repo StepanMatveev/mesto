@@ -11,12 +11,14 @@ export default class FormValidator {
     //общая валидация и сброс ошибок
     enableValidation() { 
         const inputElements = Array.from(this._formElement.querySelectorAll(this._inputSelector));   
-
         inputElements.forEach (input => {
             input.addEventListener('input', e => this._handleCheckInput(e, this._inputErrorClass, this._errorClass));
         });
         this._formElement.addEventListener('input', () => this._handleCheckSubmit(this._formElement, this._submitButton, this._inactiveButtonClass));
+    }    
         //сброс ошибок
+    resetErrors() {   
+        const inputElements = Array.from(this._formElement.querySelectorAll(this._inputSelector));   
         inputElements.forEach (input => {
             this._hideInputError(input, this._inputErrorClass, this._errorClass);
         });
