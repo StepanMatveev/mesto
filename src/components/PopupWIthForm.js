@@ -30,4 +30,12 @@ export default class PopupWithForm extends Popup {
             this._popup.querySelector('.popup__container').reset();
         }
     }
- }
+
+    renderLoading(isLoading) {
+        if (isLoading) {
+            this._popup.querySelector('.popup__save-button').textContent = 'Сохранение...';
+        } else {
+            this._popup.querySelector('.popup__save-button').textContent = 'Сохранить';
+        }
+    }
+}
