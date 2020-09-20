@@ -58,6 +58,4 @@ export default class FormValidator {
         error.classList.remove(errorClass);
         error.textContent = '';
     }
-
-
 }
