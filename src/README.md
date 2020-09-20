@@ -16,7 +16,10 @@
 * Сделать страницу адаптивной
 * Знакомство с JavaScript
 * Добавление валидации форм
-* Знакомство с классами 
+* Знакомство с классами
+* Webpack
+* Сохранение данных при перезагрузке страницы
+* Создание gh-pages и выкладывание на сервер Github 
 
 #### Страница адаптирована под следующие разрешения экранов:
 * Изучить 320px
@@ -24,7 +27,7 @@
 
 
 ### Ссылка
-[https://stepanmatveev.github.io/mesto/.html](https://stepanmatveev.github.io/mesto/index.html)
+[Mesto](https://stepanmatveev.github.io/mesto)
 
 
 ### Разработчик
